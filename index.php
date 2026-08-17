@@ -2,14 +2,14 @@
 
  session_start(); // inicia uma sessão
 
-    include("infra/db/connect.php"); // connecta com o BD
+    include("infra/conexao.php"); // connecta com o BD
 
     if($_SERVER['REQUEST_METHOD'] == "POST"){ // Verifica se o request_method é do tipo "POST"
 
         $usuario = $_POST["usuario"];//guarda o dado inserido pelo usuário no input de name "usuario"
-        $senha = $_POST["senha"];// guarda o dado inserido pelo usuário no input de name "senha"
+        $email = $_POST["email"];// guarda o dado inserido pelo usuário no input de name "senha"
         
-        $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND senha = '$senha'";// cria uma query que seleciona todos os dados da tabela usuario que são iguais aos que usuario digitou
+        $sql = "SELECT * FROM usuario WHERE nome_usuario = '$usuario' AND email = '$email'";// cria uma query que seleciona todos os dados da tabela usuario que são iguais aos que usuario digitou
 
         $resultado = $conn->query($sql);// armazena a variavel $conn que executa a query $sql
 
@@ -34,13 +34,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Sitema de Login Simples</h1>
+    <h1>Cadastro</h1>
 
     <form method="POST">
         <label>Usuário:</label>
         <input type="text" name="usuario">
         <br>
-        <label>Senha:</label>
+        <label>Email:</label>
         <input type="password" name="senha">
         <br>
         <?php
