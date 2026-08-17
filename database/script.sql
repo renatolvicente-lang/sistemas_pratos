@@ -4,17 +4,17 @@ use sistemas_pratos;
 
 CREATE table usuarios(
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
-    nome_usuario VARCHAR NOT NULL,
-    senha INT NOT NULL
+    nome_usuario VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL
 
 );
 
 CREATE table pratos(
     id_prato INT PRIMARY KEY AUTO_INCREMENT,
-    nome_prato VARCHAR NOT NULL,
+    nome_prato VARCHAR(255) NOT NULL,
     descrição TEXT NOT NULL,
-    preco FLOAT NOT NULL,
-    categoria VARCHAR NOT NULL,
-    id_usuario VARCHAR,
-    foreign KEY (id_usuario) references usuarios(id)
+    preco DECIMAL(10,2) NOT NULL,
+    categoria VARCHAR(100) NOT NULL,
+    id_usuario INT,
+    foreign KEY (id_usuario) references usuarios(id_usuario)
 );
