@@ -11,14 +11,14 @@
         
         $sql = "SELECT * FROM usuario WHERE nome_usuario = '$usuario' AND email = '$email'";// cria uma query que seleciona todos os dados da tabela usuario que são iguais aos que usuario digitou
 
-        $resultado = $conn->query($sql);// armazena a variavel $conn que executa a query $sql
+        $resultado = $conexao->query($sql);// armazena a variavel $conn que executa a query $sql
 
-        if ($resultado->num_rows > 0){// verifica se o numero de linhas da matriz resultado é maior que 0
+        if ($resultado-> num_rows > 0){// verifica se o numero de linhas da matriz resultado é maior que 0
             $_SESSION["usuario"] = $usuario;// Nomeia a Sessão
             header("Location: public/home.php");// manda para a pagina home.php
             exit();
         }else{
-            $erro = "Usuário ou senha inválidos!";// mensagem caso a operação de erro
+            $erro = "Usuário ou email inválidos!";// mensagem caso a operação de erro
         }
     }
 
@@ -41,7 +41,7 @@
         <input type="text" name="usuario">
         <br>
         <label>Email:</label>
-        <input type="password" name="senha">
+        <input type="email" name="email">
         <br>
         <?php
             
