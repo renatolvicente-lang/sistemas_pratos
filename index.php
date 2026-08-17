@@ -15,7 +15,7 @@
 
         if ($resultado-> num_rows > 0){// verifica se o numero de linhas da matriz resultado é maior que 0
             $_SESSION["usuario"] = $usuario;// Nomeia a Sessão
-            header("Location: public/home.php");// manda para a pagina home.php
+            header("Location: public/cadastro_pratos.php");// manda para a pagina home.php
             exit();
         }else{
             $erro = "Usuário ou email inválidos!";// mensagem caso a operação de erro
