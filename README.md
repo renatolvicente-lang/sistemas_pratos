@@ -11,6 +11,7 @@ Sistema CRUD simples em PHP e MySQL para cadastrar usuários, cadastrar pratos, 
 ## Estrutura
 
 - `index.php` - cadastro e listagem de usuários
+- `public/usuarios.php` - listagem de usuários cadastrados
 - `public/cadastro_pratos.php` - cadastro, listagem, edição e exclusão de pratos
 - `public/editar_prato.php` - edição de um prato específico
 - `public/excluir_prato.php` - exclusão de um prato específico
@@ -31,4 +32,3 @@ Sistema CRUD simples em PHP e MySQL para cadastrar usuários, cadastrar pratos, 
 - O projeto usa `Prepared Statements` nas operações que recebem dados do usuário.
 - Antes de cadastrar um prato, é necessário cadastrar pelo menos um usuário.
 - Se o seu MySQL do XAMPP estiver sem senha, deixe a variável `$senha` vazia em `infra/conexao.php`.
-

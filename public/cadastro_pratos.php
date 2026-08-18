@@ -144,6 +144,7 @@ renderizar_cabecalho('Cadastro de pratos');
                 <div class="acoes-form">
                     <button class="botao" type="submit">Cadastrar prato</button>
                     <a class="botao-secundario" href="/sistemas_pratos/index.php">Cadastrar usuários</a>
+                    <a class="botao-secundario" href="/sistemas_pratos/public/usuarios.php">Ver usuários</a>
                 </div>
             </form>
         <?php else: ?>
@@ -231,4 +232,3 @@ renderizar_cabecalho('Cadastro de pratos');
 </section>
 
 <?php renderizar_rodape(); ?>
-
