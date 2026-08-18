@@ -66,6 +66,7 @@ renderizar_cabecalho('Cadastro de usuários');
             <div class="acoes-form">
                 <button class="botao" type="submit">Cadastrar usuário</button>
                 <a class="botao-secundario" href="/sistemas_pratos/public/cadastro_pratos.php">Ir para pratos</a>
+                <a class="botao-secundario" href="/sistemas_pratos/public/usuarios.php">Ver usuários</a>
             </div>
         </form>
     </article>

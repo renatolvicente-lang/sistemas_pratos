@@ -35,7 +35,8 @@ function renderizar_cabecalho(string $titulo): void
                     <h1><?php echo esc($titulo); ?></h1>
                 </div>
                 <nav class="menu">
-                    <a href="/sistemas_pratos/index.php">Usuários</a>
+                    <a href="/sistemas_pratos/index.php">Início</a>
+                    <a href="/sistemas_pratos/public/usuarios.php">Usuários</a>
                     <a href="/sistemas_pratos/public/cadastro_pratos.php">Pratos</a>
                     <a href="/sistemas_pratos/public/pratos_por_usuario.php">Por usuário</a>
                 </nav>
