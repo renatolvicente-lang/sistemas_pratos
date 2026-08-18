@@ -14,11 +14,19 @@
         $resultado = $conexao->query($sql);// armazena a variavel $conn que executa a query $sql
 
         if ($resultado-> num_rows > 0){// verifica se o numero de linhas da matriz resultado é maior que 0
-            $_SESSION["usuario"] = $usuario;// Nomeia a Sessão
-            header("Location: public/cadastro_pratos.php");// manda para a pagina home.php
-            exit();
+            $erro = "Usuario ja cadastrado!";
         }else{
-            $erro = "Usuário ou email inválidos!";// mensagem caso a operação de erro
+            //cadastrando novo usuario
+            $sql = "INSERT INTO usuario (nome_usuario, email) VALUES ('$usuario','$email')";
+
+            if($conexao->query(sql)){
+                $_SESSION["usuario"] = $usuario;
+
+                header("Location: public/cadastro_pratos.php");
+                exit();
+            }else{
+                $erro = "Erro ao realizar o cadastro";
+            }
         }
     }
 
