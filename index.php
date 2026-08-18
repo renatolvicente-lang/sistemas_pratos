@@ -1,66 +1,114 @@
-<?php 
+<?php
 
- session_start(); // inicia uma sessão
+require_once __DIR__ . '/includes/bootstrap.php';
 
-    include("infra/conexao.php"); // connecta com o BD
+$nomeUsuario = '';
+$emailUsuario = '';
 
-    if($_SERVER['REQUEST_METHOD'] == "POST"){ // Verifica se o request_method é do tipo "POST"
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nomeUsuario = trim($_POST['usuario'] ?? '');
+    $emailUsuario = trim($_POST['email'] ?? '');
 
-        $usuario = $_POST["usuario"];//guarda o dado inserido pelo usuário no input de name "usuario"
-        $email = $_POST["email"];// guarda o dado inserido pelo usuário no input de name "senha"
-        
-        $sql = "SELECT * FROM usuario WHERE nome_usuario = '$usuario' AND email = '$email'";// cria uma query que seleciona todos os dados da tabela usuario que são iguais aos que usuario digitou
+    if ($nomeUsuario === '' || $emailUsuario === '') {
+        flash('erro', 'Preencha nome e e-mail para cadastrar o usuário.');
+    } else {
+        $verificar = $conexao->prepare('SELECT id_usuario FROM usuarios WHERE nome_usuario = ? OR email = ?');
+        $verificar->bind_param('ss', $nomeUsuario, $emailUsuario);
+        $verificar->execute();
+        $resultadoVerificacao = $verificar->get_result();
 
-        $resultado = $conexao->query($sql);// armazena a variavel $conn que executa a query $sql
+        if ($resultadoVerificacao->num_rows > 0) {
+            flash('aviso', 'Esse usuário ou e-mail já está cadastrado.');
+        } else {
+            $inserir = $conexao->prepare('INSERT INTO usuarios (nome_usuario, email) VALUES (?, ?)');
+            $inserir->bind_param('ss', $nomeUsuario, $emailUsuario);
 
-        if ($resultado-> num_rows > 0){// verifica se o numero de linhas da matriz resultado é maior que 0
-            $erro = "Usuario ja cadastrado!";
-        }else{
-            //cadastrando novo usuario
-            $sql = "INSERT INTO usuario (nome_usuario, email) VALUES ('$usuario','$email')";
-
-            if($conexao->query(sql)){
-                $_SESSION["usuario"] = $usuario;
-
-                header("Location: public/cadastro_pratos.php");
-                exit();
-            }else{
-                $erro = "Erro ao realizar o cadastro";
+            if ($inserir->execute()) {
+                flash('sucesso', 'Usuário cadastrado com sucesso.');
+                $nomeUsuario = '';
+                $emailUsuario = '';
+            } else {
+                flash('erro', 'Não foi possível cadastrar o usuário.');
             }
+
+            $inserir->close();
         }
+
+        $verificar->close();
     }
+}
 
+$usuarios = $conexao->query('SELECT id_usuario, nome_usuario, email FROM usuarios ORDER BY nome_usuario');
 
-
+renderizar_cabecalho('Cadastro de usuários');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Cadastro</h1>
+<section class="grade">
+    <article class="card">
+        <h2>Novo usuário</h2>
+        <p class="texto-suave">Cadastre o responsável pelos pratos do restaurante.</p>
 
-    <form method="POST">
-        <label>Usuário:</label>
-        <input type="text" name="usuario">
-        <br>
-        <label>Email:</label>
-        <input type="email" name="email">
-        <br>
-        <?php
-            
-            if(isset($erro)){
-                echo $erro;
-            };
+        <?php echo flash(); ?>
 
-            
-        ?>
-        <br>
-        <button type="submit">Entrar</button>
-    </form>
-</body>
-</html>
+        <form method="POST">
+            <div class="form-grid">
+                <div class="campo">
+                    <label for="usuario">Nome</label>
+                    <input type="text" id="usuario" name="usuario" value="<?php echo esc($nomeUsuario); ?>" placeholder="Ex.: Maria Silva">
+                </div>
+
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" value="<?php echo esc($emailUsuario); ?>" placeholder="exemplo@restaurante.com">
+                </div>
+            </div>
+
+            <div class="acoes-form">
+                <button class="botao" type="submit">Cadastrar usuário</button>
+                <a class="botao-secundario" href="/sistemas_pratos/public/cadastro_pratos.php">Ir para pratos</a>
+            </div>
+        </form>
+    </article>
+
+    <article class="card">
+        <h2>Orientação rápida</h2>
+        <ul>
+            <li>Primeiro cadastre os usuários.</li>
+            <li>Depois use a página de pratos para relacionar cada item ao seu responsável.</li>
+            <li>Os pratos podem ser editados, excluídos e filtrados por usuário.</li>
+        </ul>
+    </article>
+</section>
+
+<section class="card">
+    <h2>Usuários cadastrados</h2>
+
+    <?php if ($usuarios && $usuarios->num_rows > 0): ?>
+        <table class="lista">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($usuario = $usuarios->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo esc($usuario['nome_usuario']); ?></td>
+                        <td><?php echo esc($usuario['email']); ?></td>
+                        <td>
+                            <a class="botao-secundario" href="/sistemas_pratos/public/cadastro_pratos.php?usuario_id=<?php echo (int) $usuario['id_usuario']; ?>">
+                                Ver pratos
+                            </a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p class="texto-suave">Nenhum usuário cadastrado ainda.</p>
+    <?php endif; ?>
+</section>
+
+<?php renderizar_rodape(); ?>
