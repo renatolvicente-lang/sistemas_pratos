@@ -83,36 +83,6 @@ renderizar_cabecalho('Cadastro de usuários');
     
 </section>
 
-<section class="card">
-    <h2>Usuários cadastrados</h2>
-
-    <?php if ($usuarios && $usuarios->num_rows > 0): ?>
-        <table class="lista">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($usuario = $usuarios->fetch_assoc()): ?>
-                    <tr>
-                        <td><?php echo esc($usuario['nome_usuario']); ?></td>
-                        <td><?php echo esc($usuario['email']); ?></td>
-                        <td>
-                            <a class="botao-secundario" href="/sistemas_pratos/public/cadastro_pratos.php?usuario_id=<?php echo (int) $usuario['id_usuario']; ?>">
-                                Ver pratos
-                            </a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p class="texto-suave">Nenhum usuário cadastrado ainda.</p>
-    <?php endif; ?>
-</section>
 </body>
 </html>
 
