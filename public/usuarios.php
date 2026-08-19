@@ -13,7 +13,16 @@ $usuarios = $conexao->query(
 renderizar_cabecalho('Usuários cadastrados');
 ?>
 
-<section class="card">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="styles/css/style.css">
+</head>
+<body>
+    <section class="card">
     <h2>Usuários cadastrados</h2>
     <p class="texto-suave">Aqui ficam os usuários registrados no sistema e a quantidade de pratos vinculados a cada um.</p>
 
@@ -47,6 +56,8 @@ renderizar_cabecalho('Usuários cadastrados');
         <p class="texto-suave">Nenhum usuário cadastrado ainda.</p>
     <?php endif; ?>
 </section>
+</body>
+</html>
 
 <?php renderizar_rodape(); ?>
 

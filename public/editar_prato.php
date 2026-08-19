@@ -63,7 +63,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 renderizar_cabecalho('Editar prato');
 ?>
 
-<section class="card">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar prato</title>
+    <link rel="stylesheet" href="styles/css/style.css">
+</head>
+<body>
+    <section class="card">
     <h2>Editar prato</h2>
     <p class="texto-suave">Responsável pelo cadastro: <strong><?php echo esc($prato['nome_usuario']); ?></strong></p>
 
@@ -103,6 +112,8 @@ renderizar_cabecalho('Editar prato');
         </div>
     </form>
 </section>
+</body>
+</html>
 
 <?php renderizar_rodape(); ?>
 

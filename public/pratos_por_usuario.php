@@ -38,7 +38,16 @@ if ($usuarioSelecionadoId > 0) {
 renderizar_cabecalho('Pratos por usuário');
 ?>
 
-<section class="card">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pratos_por_usuario</title>
+    <link rel="stylesheet" href="styles/css/style.css">
+</head>
+<body>
+    <section class="card">
     <h2>Consulta por usuário</h2>
     <p class="texto-suave">Escolha um usuário para ver os pratos cadastrados por ele.</p>
 
@@ -102,6 +111,8 @@ renderizar_cabecalho('Pratos por usuário');
         <p class="texto-suave">Use o formulário acima para fazer a consulta.</p>
     <?php endif; ?>
 </section>
+</body>
+</html>
 
 <?php renderizar_rodape(); ?>
 

@@ -43,7 +43,16 @@ $usuarios = $conexao->query('SELECT id_usuario, nome_usuario, email FROM usuario
 renderizar_cabecalho('Cadastro de usuários');
 ?>
 
-<section class="grade">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuários</title>
+    <link rel="stylesheet" href="styles/css/style.css">
+</head>
+<body>
+    <section class="grade">
     <article class="card">
         <h2>Novo usuário</h2>
         <p class="texto-suave">Cadastre o responsável pelos pratos do restaurante.</p>
@@ -71,14 +80,7 @@ renderizar_cabecalho('Cadastro de usuários');
         </form>
     </article>
 
-    <article class="card">
-        <h2>Orientação rápida</h2>
-        <ul>
-            <li>Primeiro cadastre os usuários.</li>
-            <li>Depois use a página de pratos para relacionar cada item ao seu responsável.</li>
-            <li>Os pratos podem ser editados, excluídos e filtrados por usuário.</li>
-        </ul>
-    </article>
+    
 </section>
 
 <section class="card">
@@ -111,5 +113,7 @@ renderizar_cabecalho('Cadastro de usuários');
         <p class="texto-suave">Nenhum usuário cadastrado ainda.</p>
     <?php endif; ?>
 </section>
+</body>
+</html>
 
 <?php renderizar_rodape(); ?>
