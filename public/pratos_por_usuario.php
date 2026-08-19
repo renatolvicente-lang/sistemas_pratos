@@ -44,7 +44,7 @@ renderizar_cabecalho('Pratos por usuário');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pratos_por_usuario</title>
-    <link rel="stylesheet" href="styles/css/style.css">
+    <link rel="stylesheet" href="../styles/css/style.css">
 </head>
 <body>
     <section class="card">
