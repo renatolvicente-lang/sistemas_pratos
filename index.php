@@ -27,6 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 flash('sucesso', 'Usuário cadastrado com sucesso.');
                 $nomeUsuario = '';
                 $emailUsuario = '';
+                
+                header("Location: public/cadastro_pratos.php");
+                exit();
             } else {
                 flash('erro', 'Não foi possível cadastrar o usuário.');
             }
@@ -53,7 +56,7 @@ renderizar_cabecalho('Cadastro de usuários');
 </head>
 <body>
     <section class="grade">
-    <article class="card">
+    <div class="card">
         <h2>Novo usuário</h2>
         <p class="texto-suave">Cadastre o responsável pelos pratos do restaurante.</p>
 
@@ -78,7 +81,7 @@ renderizar_cabecalho('Cadastro de usuários');
                 <a class="botao-secundario" href="/sistemas_pratos/public/usuarios.php">Ver usuários</a>
             </div>
         </form>
-    </article>
+    </div>
 
     
 </section>

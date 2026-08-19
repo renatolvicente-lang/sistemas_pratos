@@ -95,7 +95,16 @@ if ($usuarioSelecionadoId > 0) {
 renderizar_cabecalho('Cadastro de pratos');
 ?>
 
-<section class="bloco-grid">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pratos</title>
+    <link rel="stylesheet" href="styles/css/style.css">
+</head>
+<body>
+    <section class="bloco-grid">
     <article class="card">
         <h2>Novo prato</h2>
         <p class="texto-suave">Cada prato é vinculado ao usuário que fez o cadastro.</p>
@@ -151,36 +160,6 @@ renderizar_cabecalho('Cadastro de pratos');
             <div class="alerta alerta-aviso">Cadastre pelo menos um usuário antes de adicionar pratos.</div>
         <?php endif; ?>
     </article>
-
-    <article class="card">
-        <h2>Filtro por usuário</h2>
-        <p class="texto-suave">Escolha um usuário para ver somente os pratos cadastrados por ele.</p>
-
-        <form method="GET">
-            <div class="campo">
-                <label for="usuario_id">Usuário</label>
-                <select id="usuario_id" name="usuario_id">
-                    <option value="">Todos os usuários</option>
-                    <?php
-                    if ($usuarios && $usuarios->num_rows > 0) {
-                        $usuarios->data_seek(0);
-                        while ($usuario = $usuarios->fetch_assoc()):
-                        ?>
-                            <option value="<?php echo (int) $usuario['id_usuario']; ?>" <?php echo ((int) $usuarioSelecionadoId === (int) $usuario['id_usuario']) ? 'selected' : ''; ?>>
-                                <?php echo esc($usuario['nome_usuario']); ?>
-                            </option>
-                        <?php endwhile;
-                    }
-                    ?>
-                </select>
-            </div>
-
-            <div class="acoes-form">
-                <button class="botao-secundario" type="submit">Filtrar</button>
-                <a class="botao-secundario" href="/sistemas_pratos/public/cadastro_pratos.php">Ver todos</a>
-            </div>
-        </form>
-    </article>
 </section>
 
 <section class="card">
@@ -231,4 +210,6 @@ renderizar_cabecalho('Cadastro de pratos');
     <?php endif; ?>
 </section>
 
+</body>
+</html>
 <?php renderizar_rodape(); ?>
